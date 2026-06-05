@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+<title>Il Nostro Matrimonio</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Georgia,serif;
+background:#F6F1EA;
+color:#5A4738;
+}
+
+.hero{
+
+height:100vh;
+
+background:
+linear-gradient(
+rgba(0,0,0,.25),
+rgba(0,0,0,.25)
+),
+
+url("FOTO_COPERTINA");
+
+background-size:cover;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+color:white;
+
+}
+
+.hero h1{
+font-size:64px;
+}
+
+.section{
+
+max-width:900px;
+
+margin:auto;
+
+padding:80px 30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:40px;
+
+border-radius:20px;
+
+margin-bottom:40px;
+
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+
+padding:14px;
+
+margin:10px 0;
+
+border:1px solid #ddd;
+
+border-radius:10px;
+
+}
+
+button{
+
+background:#A86A4A;
+
+color:white;
+
+border:none;
+
+padding:16px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+#countdown{
+
+font-size:34px;
+
+margin-top:20px;
+
+}
+
+iframe{
+
+width:100%;
+
+height:420px;
+
+border:none;
+
+border-radius:18px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="hero">
+
+<div>
+
+<h1>Giulia & Marco</h1>
+
+<p>12 Ottobre 2026</p>
+
+<div id="countdown"></div>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="card">
+
+<h2>Conferma Presenza</h2>
+
+<input id="nome" placeholder="Nome">
+
+<input id="invitati" type="number">
+
+<select id="presenza">
+
+<option>Parteciperò</option>
+
+<option>Non potrò esserci</option>
+
+</select>
+
+<textarea id="note"></textarea>
+
+<button onclick="rsvp()">
+
+Invia RSVP
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Lista Nozze</h2>
+
+<input id="rnome" placeholder="Nome">
+
+<input id="importo" type="number">
+
+<textarea id="msg"></textarea>
+
+<button onclick="regalo()">
+
+Contribuisci
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Dove sarà</h2>
+
+<iframe
+src="GOOGLE_MAPS_URL">
+</iframe>
+
+</div>
+
+</div>
+
+<script>
+
+const data=new Date(
+"2026-10-12"
+);
+
+function timer(){
+
+const diff=data-new Date();
+
+const g=Math.floor(
+diff/86400000
+);
+
+document
+.getElementById(
+"countdown"
+)
+
+.innerHTML=
+
+g+" giorni";
+
+}
+
+setInterval(
+timer,
+1000
+);
+
+async function send(data){
+
+await fetch(
+
+"URL_SCRIPT",
+
+{
+
+method:"POST",
+
+body:
+JSON.stringify(data)
+
+}
+
+);
+
+alert(
+"Inviato ❤️"
+);
+
+}
+
+function rsvp(){
+
+send({
+
+type:"rsvp",
+
+nome:
+nome.value,
+
+invitati:
+invitati.value,
+
+presenza:
+presenza.value,
+
+note:
+note.value
+
+});
+
+}
+
+function regalo(){
+
+send({
+
+type:"regalo",
+
+nome:
+rnome.value,
+
+importo:
+importo.value,
+
+messaggio:
+msg.value
+
+});
+
+}
+
+timer();
+
+</script>
+
+</body>
+</html>
