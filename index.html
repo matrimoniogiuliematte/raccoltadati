@@ -101,6 +101,43 @@ cursor:pointer;
 
 }
 
+  .clock{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+margin-top:20px;
+font-variant-numeric: tabular-nums;
+}
+
+.block{
+text-align:center;
+min-width:70px;
+transition:opacity .3s ease, transform .3s ease;
+}
+
+.num{
+font-size:34px;
+letter-spacing:2px;
+}
+
+.label{
+font-size:12px;
+opacity:.7;
+letter-spacing:1px;
+}
+
+.sep{
+font-size:22px;
+opacity:.5;
+}
+
+/* effetto fade aggiornamento */
+.fade{
+opacity:0.3;
+transform:translateY(-2px);
+}
+  
 #countdown{
 font-size:34px;
 margin-top:20px;
@@ -135,7 +172,35 @@ border-radius:18px;
 
 <p>7 Novembre 2026</p>
 
-<div id="countdown"></div>
+<div id="countdown" class="clock">
+
+  <div class="block">
+    <div class="num" id="days">000</div>
+    <div class="label">GGG</div>
+  </div>
+
+  <div class="sep">|</div>
+
+  <div class="block">
+    <div class="num" id="hours">00</div>
+    <div class="label">HH</div>
+  </div>
+
+  <div class="sep">|</div>
+
+  <div class="block">
+    <div class="num" id="minutes">00</div>
+    <div class="label">MM</div>
+  </div>
+
+  <div class="sep">|</div>
+
+  <div class="block">
+    <div class="num" id="seconds">00</div>
+    <div class="label">SS</div>
+  </div>
+
+</div>
 
 </div>
 
@@ -223,31 +288,45 @@ const data=new Date(
 "2026-11-07"
 );
 
+function animate(id, value){
+
+const el = document.getElementById(id);
+
+if(el.innerText !== value){
+
+el.classList.add("fade");
+
+setTimeout(()=>{
+el.innerText = value;
+el.classList.remove("fade");
+},150);
+
+}else{
+el.innerText = value;
+}
+
+}
+
 function timer(){
 
 const now = new Date();
-const diff = data - now;
+let diff = data - now;
 
-// totale secondi
+if(diff < 0) diff = 0;
+
 let totalSeconds = Math.floor(diff / 1000);
 
-if (totalSeconds < 0) totalSeconds = 0;
-
-// calcoli
 const days = Math.floor(totalSeconds / 86400);
 const hours = Math.floor((totalSeconds % 86400) / 3600);
 const minutes = Math.floor((totalSeconds % 3600) / 60);
 const seconds = totalSeconds % 60;
 
-// padding con zero
-const pad = (n) => String(n).padStart(2, "0");
+const pad = (n, l=2) => String(n).padStart(l,"0");
 
-// output formato GGG:HH:MM:SS
-document.getElementById("countdown").innerHTML =
-String(days).padStart(3, "0") + ":" +
-pad(hours) + ":" +
-pad(minutes) + ":" +
-pad(seconds);
+animate("days", pad(days,3));
+animate("hours", pad(hours));
+animate("minutes", pad(minutes));
+animate("seconds", pad(seconds));
 
 }
 
