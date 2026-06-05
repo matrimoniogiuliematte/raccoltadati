@@ -197,7 +197,11 @@ border:2px solid #A86A4A;
 .card h2{
 text-align:center !important;
 }
-  
+
+.center{
+text-align:center;
+}
+
 </style>
 
 </head>
@@ -291,24 +295,23 @@ text-align:center !important;
 
 <h2>— TRASPORTI —</h2>
 
-<p>Vieni con mezzo proprio?</p>
+<p>Vieni con mezzo proprio (auto/moto/velivolo privato)?</p>
 <select id="mezzo">
 <option>Sì</option>
 <option>No</option>
 </select>
 
-<p>Se sì, possiamo proporti passaggi?</p>
+<p>Se sì, possiamo romperti per proporti passaggi?</p>
 <select id="passaggi">
 <option>Sì</option>
 <option>No</option>
 </select>
 
 <p>Dove arrivi?</p>
-<input id="arrivo" placeholder="Es: Trieste, Lubiana...">
+<input id="arrivo" placeholder="Es: Trieste, Palermo, Lubiana...">
 
-<p style="margin-top:15px;">
-La chiesa è nel centro della città, parcheggi complessi.  
-Il pranzo invece ha ampio parcheggio in collina.
+<p class="center">
+La chiesa è nel centro della città, vi aggiorneremo in quanto nell’area trovare parcheggio è complesso. La località ove pranzeremo invece ha letteralmente mezza collina come parcheggio.
 </p>
 
 </div>
@@ -318,7 +321,9 @@ Il pranzo invece ha ampio parcheggio in collina.
 
 <h2>— PERNOTTO —</h2>
 
-<p>Seleziona le strutture di interesse:</p>
+<p class="center">
+Abbiamo pensato a diverse proposte, a cui potete scriverci se interessati (sia per la notte di venerdì che per la notte di sabato), vota se sei interessato o meno a:
+</p>
 
 <div class="grid">
 
@@ -351,11 +356,9 @@ Il pranzo invece ha ampio parcheggio in collina.
 
 <h2>— LISTA NOZZE —</h2>
 
-<p>
+<p class="center">
 Eccallà (slowly opens portamonete), in piena libertà di fare come pare e piace, qua sotto avevamo preparato delle cassette virtuali per spese che faremo nel prossimo futuro (un’altro trasloco quest’anno non ce la si fa). Se compilate vi faremo avere l’IBAN discretamente all’invio, altrimenti no e vi invieremo uno smile imbronciato (scherziamo. anche se in realtà sappiamo dove abiti)
 </p>
-
-<p>Seleziona le destinazioni regalo:</p>
 
 <div class="grid">
 
@@ -375,7 +378,7 @@ Eccallà (slowly opens portamonete), in piena libertà di fare come pare e piace
 
 <button onclick="submitForm()">INVIA</button>
 
-<p style="margin-top:10px;">
+<p class="center">
 Non scordarti di premere INVIO :)
 </p>
 
