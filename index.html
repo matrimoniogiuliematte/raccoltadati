@@ -157,7 +157,13 @@ border:none;
 border-radius:18px;
 
 }
-
+  
+@keyframes pulse {
+0% { opacity:1; transform:scale(1); }
+50% { opacity:0.6; transform:scale(1.05); }
+100% { opacity:1; transform:scale(1); }
+}
+  
 </style>
 
 </head>
@@ -312,8 +318,25 @@ function timer(){
 const now = new Date();
 let diff = data - now;
 
-if(diff < 0) diff = 0;
+// 🔴 CASO EVENTO IN CORSO O PASSATO
+if(diff <= 0){
 
+document.getElementById("countdown").innerHTML = `
+<div style="
+font-size:42px;
+letter-spacing:4px;
+font-weight:bold;
+color:#A86A4A;
+animation:pulse 2s infinite;
+">
+LIVE
+</div>
+`;
+
+return;
+}
+
+// 🔵 COUNTDOWN NORMALE
 let totalSeconds = Math.floor(diff / 1000);
 
 const days = Math.floor(totalSeconds / 86400);
