@@ -20,15 +20,16 @@ color:#5A4738;
 
 height:100vh;
 
-background:
+background-image:
 linear-gradient(
-rgba(0,0,0,.25),
-rgba(0,0,0,.25)
+rgba(0,0,0,0.35),
+rgba(0,0,0,0.35)
 ),
-
 url("images/cover.jpg");
 
 background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 
 display:flex;
 
@@ -101,11 +102,11 @@ cursor:pointer;
 }
 
 #countdown{
-
 font-size:34px;
-
 margin-top:20px;
-
+letter-spacing:2px;
+font-variant-numeric: tabular-nums;
+font-family: Arial, sans-serif;
 }
 
 iframe{
@@ -224,20 +225,29 @@ const data=new Date(
 
 function timer(){
 
-const diff=data-new Date();
+const now = new Date();
+const diff = data - now;
 
-const g=Math.floor(
-diff/86400000
-);
+// totale secondi
+let totalSeconds = Math.floor(diff / 1000);
 
-document
-.getElementById(
-"countdown"
-)
+if (totalSeconds < 0) totalSeconds = 0;
 
-.innerHTML=
+// calcoli
+const days = Math.floor(totalSeconds / 86400);
+const hours = Math.floor((totalSeconds % 86400) / 3600);
+const minutes = Math.floor((totalSeconds % 3600) / 60);
+const seconds = totalSeconds % 60;
 
-g+" giorni";
+// padding con zero
+const pad = (n) => String(n).padStart(2, "0");
+
+// output formato GGG:HH:MM:SS
+document.getElementById("countdown").innerHTML =
+String(days).padStart(3, "0") + ":" +
+pad(hours) + ":" +
+pad(minutes) + ":" +
+pad(seconds);
 
 }
 
