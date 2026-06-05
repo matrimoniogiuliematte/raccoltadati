@@ -163,6 +163,36 @@ border-radius:18px;
 50% { opacity:0.6; transform:scale(1.05); }
 100% { opacity:1; transform:scale(1); }
 }
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:10px;
+}
+
+.option{
+background:white;
+border:1px solid #ddd;
+border-radius:12px;
+padding:10px;
+text-align:center;
+cursor:pointer;
+transition:.2s;
+position:relative;
+}
+
+.option img{
+width:100%;
+border-radius:10px;
+height:80px;
+object-fit:cover;
+}
+
+.option.active{
+background:rgba(168,106,74,0.15);
+border:2px solid #A86A4A;
+}
   
 </style>
 
@@ -216,45 +246,135 @@ border-radius:18px;
 
 <div class="card">
 
-<h2>Conferma Presenza</h2>
+<h2>— BENVENUTI! —</h2>
 
-<input id="nome" placeholder="Nome e Cognome">
+<p>Chi sei/siete?</p>
+<input id="chi" placeholder="Nome e cognome">
 
-<!-- TITOLO -->
-<p style="margin-top:15px; margin-bottom:5px; font-weight:bold;">
-Parteciperai?
-</p>
-
-<!-- SCELTA PRESENZA (più pulita e “squadrata”) -->
-<select id="presenza" style="
-width:100%;
-padding:14px;
-border:1px solid #ddd;
-border-radius:6px;
-background:white;
-">
-
-<option value="Parteciperò">Parteciperò</option>
-<option value="Non potrò esserci">Non potrò esserci</option>
-
+<p>Il 7 novembre sarai a Trieste?</p>
+<select id="trieste">
+<option>Sì, tutta la giornata</option>
+<option>Sì, solo alla cerimonia</option>
+<option>No</option>
 </select>
 
-<!-- NUMERO INVITATI con stile coerente -->
-<input id="invitati" type="number" placeholder="Numero invitati" style="
-width:100%;
-padding:14px;
-margin-top:10px;
-border:1px solid #ddd;
-border-radius:6px;
-">
+</div>
 
-<textarea id="note"></textarea>
 
-<button onclick="rsvp()">
+<div class="card">
 
-Invia RSVP
+<h2>— PRANZO —</h2>
 
-</button>
+<p>Hai allergie o intolleranze?</p>
+<input id="allergie">
+
+<p>Qualcuno sotto i 12 anni?</p>
+<select id="under12">
+<option>Sì</option>
+<option>No</option>
+</select>
+
+<p>Qualcuno sotto i 5 anni?</p>
+<select id="under5">
+<option>Sì</option>
+<option>No</option>
+</select>
+
+</div>
+
+
+<div class="card">
+
+<h2>— TRASPORTI —</h2>
+
+<p>Vieni con mezzo proprio?</p>
+<select id="mezzo">
+<option>Sì</option>
+<option>No</option>
+</select>
+
+<p>Se sì, possiamo proporti passaggi?</p>
+<select id="passaggi">
+<option>Sì</option>
+<option>No</option>
+</select>
+
+<p>Dove arrivi?</p>
+<input id="arrivo" placeholder="Es: Trieste, Lubiana...">
+
+<p style="margin-top:15px;">
+La chiesa è nel centro della città, parcheggi complessi.  
+Il pranzo invece ha ampio parcheggio in collina.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>— PERNOTTO —</h2>
+
+<p>Seleziona le strutture di interesse:</p>
+
+<div class="grid">
+
+<div class="option" onclick="toggle(this,'sementenova')">
+<img src="images/1.jpg">
+<p>Semente Nova</p>
+</div>
+
+<div class="option" onclick="toggle(this,'villaara')">
+<img src="images/2.jpg">
+<p>Villa Ara</p>
+</div>
+
+<div class="option" onclick="toggle(this,'gradisca')">
+<img src="images/3.jpg">
+<p>Gradisca Home</p>
+</div>
+
+<div class="option" onclick="toggle(this,'cerco')">
+<img src="images/4.jpg">
+<p>Cerco da me</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>— LISTA NOZZE —</h2>
+
+<p>
+Eccallà (slowly opens portamonete)...  
+Compila liberamente.
+</p>
+
+<p>Seleziona le destinazioni regalo:</p>
+
+<div class="grid">
+
+<div class="option" onclick="toggle(this,'viaggio')"><p>Viaggio</p></div>
+<div class="option" onclick="toggle(this,'casa')"><p>Casa</p></div>
+<div class="option" onclick="toggle(this,'trasloco')"><p>Trasloco</p></div>
+<div class="option" onclick="toggle(this,'cene')"><p>Cene</p></div>
+<div class="option" onclick="toggle(this,'esperienze')"><p>Esperienze</p></div>
+<div class="option" onclick="toggle(this,'extra')"><p>Extra</p></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<button onclick="submitForm()">INVIA</button>
+
+<p style="margin-top:10px;">
+Non scordarti di premere INVIO :)
+</p>
 
 </div>
 
@@ -423,6 +543,42 @@ msg.value
 }
 
 timer();
+
+let selections = {};
+
+function toggle(el, key){
+  if(!selections[key]){
+    selections[key]=true;
+    el.classList.add("active");
+  }else{
+    selections[key]=false;
+    el.classList.remove("active");
+  }
+}
+
+async function submitForm(){
+
+const dataToSend = {
+type:"rsvp",
+chi:document.getElementById("chi").value,
+trieste:document.getElementById("trieste").value,
+allergie:document.getElementById("allergie").value,
+under12:document.getElementById("under12").value,
+under5:document.getElementById("under5").value,
+mezzo:document.getElementById("mezzo").value,
+passaggi:document.getElementById("passaggi").value,
+arrivo:document.getElementById("arrivo").value,
+selections:selections
+};
+
+await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
+method:"POST",
+body:JSON.stringify(dataToSend)
+});
+
+alert("Sei arrivato alla fine. A questo link potrai accedere alla community e rimanere in contatto con noi su WhatsApp: ____");
+
+}
 
 </script>
 
