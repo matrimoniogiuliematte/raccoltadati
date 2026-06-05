@@ -132,7 +132,7 @@ border-radius:18px;
 
 <h1>Giulia & Matteo</h1>
 
-<p>12 Ottobre 2026</p>
+<p>7 Novembre 2026</p>
 
 <div id="countdown"></div>
 
@@ -146,17 +146,35 @@ border-radius:18px;
 
 <h2>Conferma Presenza</h2>
 
-<input id="nome" placeholder="Nome">
+<input id="nome" placeholder="Nome e Cognome">
 
-<input id="invitati" type="number">
+<!-- TITOLO -->
+<p style="margin-top:15px; margin-bottom:5px; font-weight:bold;">
+Parteciperai?
+</p>
 
-<select id="presenza">
+<!-- SCELTA PRESENZA (più pulita e “squadrata”) -->
+<select id="presenza" style="
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:6px;
+background:white;
+">
 
-<option>Parteciperò</option>
-
-<option>Non potrò esserci</option>
+<option value="Parteciperò">Parteciperò</option>
+<option value="Non potrò esserci">Non potrò esserci</option>
 
 </select>
+
+<!-- NUMERO INVITATI con stile coerente -->
+<input id="invitati" type="number" placeholder="Numero invitati" style="
+width:100%;
+padding:14px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:6px;
+">
 
 <textarea id="note"></textarea>
 
