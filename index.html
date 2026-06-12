@@ -595,13 +595,11 @@ async function send(data){
 
   await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    mode: "no-cors",
     body: JSON.stringify(data)
   });
 
-  alert("Inviato ❤️");
+  alert("Form inviato correttamente");
 }
 
 </script>
