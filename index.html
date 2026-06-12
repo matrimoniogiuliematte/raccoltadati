@@ -432,144 +432,103 @@ src="https://www.google.com/maps/d/edit?mid=1dvEHVt41dfTNQ8_d_ylnTSRYEvHzYU0&usp
 
 <script>
 
-const data=new Date(
-"2026-11-07T11:00:00"
-);
+<script>
+
+const data = new Date("2026-11-07T11:00:00");
 
 function animate(id, value){
+  const el = document.getElementById(id);
 
-const el = document.getElementById(id);
-
-if(el.innerText !== value){
-
-el.classList.add("fade");
-
-setTimeout(()=>{
-el.innerText = value;
-el.classList.remove("fade");
-},150);
-
-}else{
-el.innerText = value;
-}
-
+  if(el.innerText !== value){
+    el.classList.add("fade");
+    setTimeout(()=>{
+      el.innerText = value;
+      el.classList.remove("fade");
+    },150);
+  } else {
+    el.innerText = value;
+  }
 }
 
 function timer(){
+  const now = new Date();
+  let diff = data - now;
 
-const now = new Date();
-let diff = data - now;
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML = `
+      <div style="
+        font-size:42px;
+        letter-spacing:4px;
+        font-weight:bold;
+        color:#A86A4A;
+        animation:pulse 2s infinite;
+      ">
+      LIVE
+      </div>
+    `;
+    return;
+  }
 
-// 🔴 CASO EVENTO IN CORSO O PASSATO
-if(diff <= 0){
+  let totalSeconds = Math.floor(diff / 1000);
 
-document.getElementById("countdown").innerHTML = `
-<div style="
-font-size:42px;
-letter-spacing:4px;
-font-weight:bold;
-color:#A86A4A;
-animation:pulse 2s infinite;
-">
-LIVE
-</div>
-`;
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
 
-return;
+  const pad = (n, l=2) => String(n).padStart(l,"0");
+
+  animate("days", pad(days,3));
+  animate("hours", pad(hours));
+  animate("minutes", pad(minutes));
+  animate("seconds", pad(seconds));
 }
 
-// 🔵 COUNTDOWN NORMALE
-let totalSeconds = Math.floor(diff / 1000);
-
-const days = Math.floor(totalSeconds / 86400);
-const hours = Math.floor((totalSeconds % 86400) / 3600);
-const minutes = Math.floor((totalSeconds % 3600) / 60);
-const seconds = totalSeconds % 60;
-
-const pad = (n, l=2) => String(n).padStart(l,"0");
-
-animate("days", pad(days,3));
-animate("hours", pad(hours));
-animate("minutes", pad(minutes));
-animate("seconds", pad(seconds));
-
-}
-
-setInterval(
-timer,
-1000
-);
-
-async function send(data){
-
-  await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify(data)
-  });
-
-  alert("Inviato ❤️");
-}
-
-function rsvp(){
-
-send({
-
-type:"rsvp",
-
-nome:
-nome.value,
-
-invitati:
-invitati.value,
-
-presenza:
-presenza.value,
-
-note:
-note.value
-
-});
-
-}
-
-function regalo(){
-
-send({
-
-type:"regalo",
-
-nome:
-rnome.value,
-
-importo:
-importo.value,
-
-messaggio:
-msg.value
-
-});
-
-}
-
+setInterval(timer, 1000);
 timer();
 
 let selections = {};
 
 function toggle(el, key){
   if(!selections[key]){
-    selections[key]=true;
+    selections[key] = true;
     el.classList.add("active");
-  }else{
-    selections[key]=false;
+  } else {
+    selections[key] = false;
     el.classList.remove("active");
   }
 }
 
+async function send(data){
+
+  await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert("Inviato ❤️");
+}
+
 async function submitForm(){
 
+  const pernottoContainer = document.querySelectorAll(".card")[3];
+  const listaContainer = document.querySelectorAll(".card")[4];
+
+  const pernotto = [];
+  const listaNozze = [];
+
+  for (const key in selections) {
+    if (!selections[key]) continue;
+
+    const el = document.querySelector(`[onclick*="${key}"]`);
+    if (!el) continue;
+
+    if (pernottoContainer.contains(el)) pernotto.push(key);
+    if (listaContainer.contains(el)) listaNozze.push(key);
+  }
+
   const dataToSend = {
-    type:"rsvp",
+    type: "rsvp",
     chi: document.getElementById("chi").value,
     trieste: document.getElementById("trieste").value,
     allergie: document.getElementById("allergie").value,
@@ -578,30 +537,25 @@ async function submitForm(){
     mezzo: document.getElementById("mezzo").value,
     passaggi: document.getElementById("passaggi").value,
     arrivo: document.getElementById("arrivo").value,
-    pernotto: Object.keys(selections).filter(k => pernottoKeys.includes(k) && selections[k]),
-    listaNozze: Object.keys(selections).filter(k => !pernottoKeys.includes(k) && selections[k])
+
+    pernotto,
+    listaNozze,
+    selections
   };
 
-  try {
-
-    await send(dataToSend);
-
-  } catch (err) {
-    console.error("Errore invio:", err);
-    alert("Errore invio");
-  }
+  await send(dataToSend);
 }
 
-async function send(data){
-
-  await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify(data)
+function regalo(){
+  send({
+    type:"regalo",
+    nome: rnome.value,
+    importo: importo.value,
+    messaggio: msg.value
   });
-
-  alert("Form inviato correttamente");
 }
+
+</script>
 
 </script>
 
