@@ -578,8 +578,7 @@ async function submitForm(){
     mezzo: document.getElementById("mezzo").value,
     passaggi: document.getElementById("passaggi").value,
     arrivo: document.getElementById("arrivo").value,
-    pernotto: Object.keys(selections).filter(k => pernottoKeys.includes(k) && selections[k]),
-    listaNozze: Object.keys(selections).filter(k => !pernottoKeys.includes(k) && selections[k])
+    selections: selections
   };
 
   try {
