@@ -593,12 +593,17 @@ arrivo:document.getElementById("arrivo").value,
 selections:selections
 };
 
-await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
-method:"POST",
-body:JSON.stringify(dataToSend) 
-});
+async function send(data){
 
-alert("Sei arrivato alla fine. A questo link potrai accedere alla community e rimanere in contatto con noi su WhatsApp: ____");
+  await fetch("https://script.google.com/macros/s/AKfycbwllHeYN9wpG5GL3bNy8P6PtFeeezXiIXiih-LSdD0Co7C3V8gOZBghCe1OXgItMiD2/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  alert("Sei arrivato alla fine. A questo link potrai accedere alla community e rimanere in contatto con noi su WhatsApp: ____");
 
 }
 
