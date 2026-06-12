@@ -580,18 +580,28 @@ function toggle(el, key){
 
 async function submitForm(){
 
-const dataToSend = {
-type:"rsvp",
-chi:document.getElementById("chi").value,
-trieste:document.getElementById("trieste").value,
-allergie:document.getElementById("allergie").value,
-under12:document.getElementById("under12").value,
-under5:document.getElementById("under5").value,
-mezzo:document.getElementById("mezzo").value,
-passaggi:document.getElementById("passaggi").value,
-arrivo:document.getElementById("arrivo").value,
-selections:selections
-};
+  const dataToSend = {
+    type:"rsvp",
+    chi: document.getElementById("chi").value,
+    trieste: document.getElementById("trieste").value,
+    allergie: document.getElementById("allergie").value,
+    under12: document.getElementById("under12").value,
+    under5: document.getElementById("under5").value,
+    mezzo: document.getElementById("mezzo").value,
+    passaggi: document.getElementById("passaggi").value,
+    arrivo: document.getElementById("arrivo").value,
+    selections: selections
+  };
+
+  try {
+
+    await send(dataToSend);
+
+  } catch (err) {
+    console.error("Errore invio:", err);
+    alert("Errore invio");
+  }
+}
 
 async function send(data){
 
@@ -603,8 +613,7 @@ async function send(data){
     body: JSON.stringify(data)
   });
 
-  alert("Sei arrivato alla fine. A questo link potrai accedere alla community e rimanere in contatto con noi su WhatsApp: ____");
-
+  alert("Inviato ❤️");
 }
 
 </script>
