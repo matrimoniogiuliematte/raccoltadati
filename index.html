@@ -220,6 +220,57 @@ text-align:center !important;
 text-align:center !important;
 }
 
+.pernotto-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.pernotto-list .option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.2s;
+  background:white;
+}
+
+.pernotto-list .option:hover{
+  transform:scale(1.01);
+}
+
+.pernotto-list .option img{
+  width:90px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  flex-shrink:0;
+}
+
+.option-text{
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+}
+
+.option-text .title{
+  font-weight:bold;
+}
+
+.option-text .desc{
+  font-size:12px;
+  opacity:0.7;
+  margin-top:4px;
+}
+
+.option.active{
+  border:2px solid #A86A4A;
+  background:rgba(168,106,74,0.12);
+}
+
 </style>
 
 </head>
@@ -337,56 +388,59 @@ La chiesa è nel centro della città, vi aggiorneremo in quanto nell’area trov
 
 <div class="card">
 
+<div class="card">
+
 <h2>— PERNOTTO —</h2>
 
 <p class="center">
-Abbiamo pensato a diverse proposte, a cui potete scriverci se interessati (sia per la notte di venerdì che per la notte di sabato), vota se sei interessato o meno a:
+Abbiamo pensato a diverse proposte per il pernottamento. Puoi indicare una o più opzioni di interesse.
 </p>
 
-<div class="pernotto-grid">
+<div class="pernotto-list">
 
-    <div class="option" onclick="toggle(this,'sementenova')">
+  <div class="option" onclick="toggle(this,'sementenova')">
+    
+    <img src="image2.jpg">
 
-      <div class="option-content">
-
-        <img src="image2.jpg">
-
-        <div class="text">
-          <p class="title">Semente Nova</p>
-          <p class="desc">Descrizione breve della struttura, max 1–2 righe.</p>
-        </div>
-
-      </div>
-
+    <div class="option-text">
+      <div class="title">Semente Nova</div>
+      <div class="desc">Struttura immersa nel verde, camere condivise e atmosfera rilassata.</div>
     </div>
-  
 
-    <div class="option" onclick="toggle(this,'villaara')">
+  </div>
 
-  <div class="option-content">
+  <div class="option" onclick="toggle(this,'villaara')">
 
     <img src="image1.jpg">
 
-    <div class="text">
-      <p class="title">Villa Ara</p>
-      <p class="desc">Descrizione breve</p>
+    <div class="option-text">
+      <div class="title">Villa Ara</div>
+      <div class="desc">Villa elegante con camere private e parcheggio disponibile.</div>
+    </div>
+
+  </div>
+
+  <div class="option" onclick="toggle(this,'gradisca')">
+
+    <img src="image3.jpg">
+
+    <div class="option-text">
+      <div class="title">Gradisca Home</div>
+      <div class="desc">Soluzione centrale, comoda per gli spostamenti in città.</div>
+    </div>
+
+  </div>
+
+  <div class="option" onclick="toggle(this,'cerco')">
+
+    <div class="option-text">
+      <div class="title">Cerco da me</div>
+      <div class="desc">Preferisco organizzarmi autonomamente il pernottamento.</div>
     </div>
 
   </div>
 
 </div>
-
-    <div class="option" onclick="toggle(this,'gradisca')">
-      <img src="image3.jpg">
-      <p>Gradisca Home</p>
-    </div>
-
-    <div class="option" onclick="toggle(this,'cerco')">
-      <img src="image4.jpg">
-      <p>Cerco da me</p>
-    </div>
-
-  </div>
 
 </div>
 
