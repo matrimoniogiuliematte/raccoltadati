@@ -227,15 +227,8 @@ text-align:center !important;
 }
 
 .pernotto-list .option{
-  background:white;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px;
-  cursor:pointer;
-  transition:.2s;
-
   width:100%;
-  box-sizing:border-box;
+  box-sizing:border-box;  /* 🔥 garantisce che padding + bordo non facciano sforare */
 }
 
 .pernotto-list .option:hover{
@@ -259,9 +252,8 @@ text-align:center !important;
   display:flex;
   align-items:center;
   gap:12px;
-
   width:100%;
-  min-width:0;
+  min-width:0;        /* 🔥 impedisce che il contenitore si allarghi oltre la card */
 }
 
 .option-row img{
@@ -276,9 +268,10 @@ text-align:center !important;
   display:flex;
   flex-direction:column;
   text-align:left;
-
-  min-width:0;
+  min-width:0;        /* 🔥 fondamentale: permette al testo di andare a capo */
   flex:1;
+  overflow-wrap:break-word;  /* evita overflow */
+  word-break:break-word;     /* forza il testo a rientrare */
 }
 
 .option-text .title{
