@@ -227,15 +227,15 @@ text-align:center !important;
 }
 
 .pernotto-list .option{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
+  background:white;
   border:1px solid #ddd;
   border-radius:12px;
+  padding:12px;
   cursor:pointer;
   transition:.2s;
-  background:white;
+
+  width:100%;
+  box-sizing:border-box;
 }
 
 .pernotto-list .option:hover{
@@ -259,6 +259,9 @@ text-align:center !important;
   display:flex;
   align-items:center;
   gap:12px;
+
+  width:100%;
+  min-width:0;
 }
 
 .option-row img{
@@ -273,6 +276,9 @@ text-align:center !important;
   display:flex;
   flex-direction:column;
   text-align:left;
+
+  min-width:0;
+  flex:1;
 }
 
 .option-text .title{
