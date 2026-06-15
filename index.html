@@ -253,7 +253,6 @@ text-align:center !important;
   align-items:center;
   gap:12px;
   width:100%;
-  min-width:0;        /* 🔥 impedisce che il contenitore si allarghi oltre la card */
 }
 
 .option-row img{
@@ -261,21 +260,18 @@ text-align:center !important;
   height:70px;
   object-fit:cover;
   border-radius:10px;
-  flex-shrink:0;
+  flex-shrink:0; /* l'immagine NON si restringe */
 }
 
 .option-text{
   display:flex;
   flex-direction:column;
   text-align:left;
-  min-width:0;        /* 🔥 fondamentale: permette al testo di andare a capo */
-  flex:1;
-  overflow-wrap:break-word;  /* evita overflow */
-  word-break:break-word;     /* forza il testo a rientrare */
-}
 
-.option-text .title{
-  font-weight:bold;
+  flex:1;            /* prende tutto lo spazio disponibile */
+  min-width:150px;   /* 🔥 larghezza minima leggibile */
+  overflow-wrap:break-word;
+  word-break:break-word;
 }
 
 .option-text .desc{
