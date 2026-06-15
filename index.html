@@ -170,7 +170,7 @@ grid-template-columns:repeat(3,1fr);
 gap:12px;
 justify-items:center;
 align-items:center;
-// margin:0 auto;
+/* margin:0 auto; */
 }
 
 .pernotto-grid{
@@ -182,13 +182,13 @@ align-items:stretch;
   
 .option{
 width:100%;
-max-width:140px;
-margin:0 auto;
+max-width:none;   /* ✅ ora la card può occupare tutta la larghezza */
+margin:0;
 background:white;
 border:1px solid #ddd;
 border-radius:12px;
 padding:10px;
-text-align:center;
+text-align:left;  /* più naturale per testo + immagine */
 cursor:pointer;
 transition:.2s;
 position:relative;
