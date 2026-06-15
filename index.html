@@ -250,6 +250,25 @@ text-align:center !important;
   flex-shrink:0;
 }
 
+.option.active{
+  border:2px solid #A86A4A;
+  background:rgba(168,106,74,0.12);
+}
+
+.option-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.option-row img{
+  width:90px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  flex-shrink:0;
+}
+
 .option-text{
   display:flex;
   flex-direction:column;
@@ -264,11 +283,6 @@ text-align:center !important;
   font-size:12px;
   opacity:0.7;
   margin-top:4px;
-}
-
-.option.active{
-  border:2px solid #A86A4A;
-  background:rgba(168,106,74,0.12);
 }
 
 </style>
@@ -388,8 +402,6 @@ La chiesa è nel centro della città, vi aggiorneremo in quanto nell’area trov
 
 <div class="card">
 
-<div class="card">
-
 <h2>— PERNOTTO —</h2>
 
 <p class="center">
@@ -399,45 +411,42 @@ Abbiamo pensato a diverse proposte per il pernottamento. Puoi indicare una o pi�
 <div class="pernotto-list">
 
   <div class="option" onclick="toggle(this,'sementenova')">
-    
-    <img src="image2.jpg">
-
-    <div class="option-text">
-      <div class="title">Semente Nova</div>
-      <div class="desc">Struttura immersa nel verde, camere condivise e atmosfera rilassata.</div>
+    <div class="option-row">
+      <img src="image2.jpg">
+      <div class="option-text">
+        <div class="title">Semente Nova</div>
+        <div class="desc">Struttura immersa nel verde, atmosfera rilassata e spazi comuni condivisi.</div>
+      </div>
     </div>
-
   </div>
 
   <div class="option" onclick="toggle(this,'villaara')">
-
-    <img src="image1.jpg">
-
-    <div class="option-text">
-      <div class="title">Villa Ara</div>
-      <div class="desc">Villa elegante con camere private e parcheggio disponibile.</div>
+    <div class="option-row">
+      <img src="image1.jpg">
+      <div class="option-text">
+        <div class="title">Villa Ara</div>
+        <div class="desc">Villa elegante con camere private e parcheggio disponibile.</div>
+      </div>
     </div>
-
   </div>
 
   <div class="option" onclick="toggle(this,'gradisca')">
-
-    <img src="image3.jpg">
-
-    <div class="option-text">
-      <div class="title">Gradisca Home</div>
-      <div class="desc">Soluzione centrale, comoda per gli spostamenti in città.</div>
+    <div class="option-row">
+      <img src="image3.jpg">
+      <div class="option-text">
+        <div class="title">Gradisca Home</div>
+        <div class="desc">Soluzione centrale, comoda per spostamenti in città.</div>
+      </div>
     </div>
-
   </div>
 
   <div class="option" onclick="toggle(this,'cerco')">
-
-    <div class="option-text">
-      <div class="title">Cerco da me</div>
-      <div class="desc">Preferisco organizzarmi autonomamente il pernottamento.</div>
+    <div class="option-row">
+      <div class="option-text">
+        <div class="title">Cerco da me</div>
+        <div class="desc">Preferisco organizzarmi autonomamente il pernottamento.</div>
+      </div>
     </div>
-
   </div>
 
 </div>
