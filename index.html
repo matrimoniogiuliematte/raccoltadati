@@ -317,6 +317,13 @@ text-align:center !important;
   transform:scale(1.03);
 }
 
+.subtitle-small {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-top: -10px;
+  text-align: center;
+}
+
 </style>
 
 </head>
@@ -532,38 +539,23 @@ Eccallà (slowly opens portamonete), in piena libertà di fare come pare e piace
 </div>
 
 
-<div class="card">
+<div class="card" style="text-align:center;">
 
 <p class="center">
-Prima di premere invio, non scordarti di lasciarti la tua email, così da poterti confermare la ricezione e darti i link di Google Maps delle tue scelte
+Prima di premere invio, non scordarti di lasciarci la tua email, così da inviarti i link maps delle tue scelte
 </p>
 
  <input type="email" id="email" placeholder="pinco.pallino@borracciamail.es">
 
-<p class="center">
-Infine, non scordarti di premere INVIO 
-(apparirà un pop-up di conferma in pochi secondi)
-</p>
-
 <button onclick="submitForm()">INVIA</button>
+
+<p class="subtitle-small">
+(dopo aver premuto invio, apparirà un pop-up di conferma in pochi secondi)
+</p>
 
 </div>
 
 <div class="card">
-
-<h2>Lista Nozze</h2>
-
-<input id="rnome" placeholder="Nome">
-
-<input id="importo" type="number">
-
-<textarea id="msg"></textarea>
-
-<button onclick="regalo()">
-
-Contribuisci
-
-</button>
 
 </div>
 
